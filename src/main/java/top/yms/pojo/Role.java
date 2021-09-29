@@ -1,6 +1,8 @@
 package top.yms.pojo;
 
-public class Role {
+import java.io.Serializable;
+
+public class Role implements Serializable {
     private Integer id;
 
     private String roleName;
@@ -30,4 +32,14 @@ public class Role {
     public void setNote(String note) {
         this.note = note == null ? null : note.trim();
     }
+
+    @Override
+    public String toString() {
+        return "Role{" +
+                "id=" + id +
+                ", roleName='" + roleName + '\'' +
+                ", note='" + note + '\'' +
+                '}';
+    }
 }
+

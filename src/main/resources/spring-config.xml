@@ -48,7 +48,12 @@
 
 
     <!-- 开启SpringMVC框架注解的支持 -->
-    <mvc:annotation-driven conversion-service="conversionService"/>
+<!--    <mvc:annotation-driven conversion-service="conversionService"/>-->
+    <mvc:annotation-driven />
+    <!--注解适配器 -->
+
+
+
 
     <!--        <bean id="accountDao" scope="singleton" class="top.yms.dao.impl.AccountDaoImpl"></bean>-->
 

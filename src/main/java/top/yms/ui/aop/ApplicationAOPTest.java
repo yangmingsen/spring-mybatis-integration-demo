@@ -6,8 +6,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class ApplicationAOPTest {
     public static void main(String[] args) {
         ApplicationContext ac = new ClassPathXmlApplicationContext("spring-aop.xml");
-        CheckUserHolder.set("admin" +
-                "");
+        CheckUserHolder.set("admin1");
         ProductService productService = ac.getBean(ProductService.class);
         productService.delete(1L);
     }

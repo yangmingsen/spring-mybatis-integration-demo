@@ -3,19 +3,25 @@ package top.yms.controller;
 
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import top.yms.pojo.Account;
+import top.yms.pojo.Role;
 import top.yms.pojo.User;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 请求参数绑定
  */
-@Controller
+@RestController
 @RequestMapping("/param")
 public class ParamController {
 
@@ -42,6 +48,32 @@ public class ParamController {
         return "success";
     }
 
+
+
+    @RequestMapping("/getMapping")
+    public Object getMapping(@RequestBody Map map) {
+        System.out.println(map.toString());
+        Map<String, Object> map1 = new HashMap<String, Object>();
+        for(int i=0; i<5; i++) {
+            map1.put("key"+i, "value"+i);
+        }
+        return map1;
+    }
+
+    @RequestMapping("/case1")
+    public Object case1(Role role) {
+        System.out.println(role);
+        return role.toString();
+    }
+
+    @RequestMapping(value="/responseBody", produces="application/json")
+    @ResponseBody
+    public Map<String, Object> responseBody(){
+        Map<String, Object> retMap = new HashMap<>();
+        retMap.put("param1", "abc");
+        retMap.put("param2", "abcd");
+        return retMap;
+    }
 
     /**
      * 自定义类型转换器

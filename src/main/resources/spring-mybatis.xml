@@ -37,7 +37,40 @@
     </bean>
 
 
+    <!-- spring与Mybaits的整体结合原理：
+       主要是两个关键类 SqlSessionFactoryBean 和 MapperFactoryBean.
+          1. 因为 SqlSessionFactoryBean 实现 Spring的InitializingBean接口的 afterPropertiesSet 方法,那么会在Spring的
+       AbstractAutowireCapableBeanFactory.invokeInitMethods被调用(也就是初始化beans时initializeBean方法).
 
+          2.afterPropertiesSet方法会完成MyBatis初始化(如解析xml配置文件等), 然后返回一个org.apache.ibatis.session.SqlSessionFactory.
+       然后这个SqlSessionFactoryBean是一个FactoryBean,所以后续会在SqlSessionTemplate初始化时被注入进去.
+
+          3.然后再说这个MapperFactoryBean,首先他也是一个FactoryBean. 然后 他是怎么实践通过@Autowire注入,然后就可以进行调用了呢？
+          比如
+          @Autowire
+          private UserMapper userMapper
+
+          //do search. 这个怎么实现的呢?
+          userMapper.findUser(1L)..
+
+          再说一遍，因为userMapper是一个FactoryBean,所以当执行@Autowire时, 会调用 MapperFactoryBean.getObject()方法,
+          而getObject() => return getSqlSession().getMapper(this.mapperInterface).
+
+          这个getSqlSession是一个 SqlSessionTemplate. 这个 SqlSessionTemplate 就一个 Mybatis中的 SqlSession 的包装.
+
+          所以 getSqlSession().getMapper(this.mapperInterface) 会调用org.apache.ibatis.session.SqlSession.getMapper()方法.
+
+          这个方法在mybatis中是以代理实现的,也就是说它会返回一个接口的代理实现类(比如为 UserMapperProxyImpl ), 那么当业务代码调用时,比如userMaper.findUser(1L),
+          那么这个userMaper代理实现类(UserMapperProxyImpl)便会invoke代理方法,代理方法会根据方法名去MyBatis中的Configuration找对应的Mapper,然后执行SQL操作
+
+       -->
+    <bean id="userMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <!--sqlSessionFactory属性指定要用到的SqlSessionFactory实例-->
+        <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+        <!--mapperInterface属性指定映射器接口，用于实现此接口并生成映射器对象-->
+        <property name="mapperInterface" value="top.yms.mapper.UserMapper" />
+
+    </bean>
 
 
 

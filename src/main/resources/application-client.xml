@@ -3,8 +3,8 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="myCat" class="top.yms.ui.bean.MyCat"></bean>
-    <bean class="top.yms.ui.bean.MyBody"></bean>
-    <bean class="top.yms.ui.bean.MyHeader"></bean>
+    <bean id="myCat" class="top.yms.ui.bean.MyCat"/>
+    <bean class="top.yms.ui.bean.MyBody"/>
+    <bean class="top.yms.ui.bean.MyHeader"/>
     <bean class="top.yms.ui.bean.MyInstantiationAwareBeanPostProcessor"></bean>
 </beans>
