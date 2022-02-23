@@ -60,7 +60,7 @@
 
           所以 getSqlSession().getMapper(this.mapperInterface) 会调用org.apache.ibatis.session.SqlSession.getMapper()方法.
 
-          这个方法在mybatis中是以代理实现的,也就是说它会返回一个接口的代理实现类(比如为 UserMapperProxyImpl ), 那么当业务代码调用时,比如userMaper.findUser(1L),
+          getMapper()这个方法在mybatis中是以代理实现的,也就是说它会返回一个接口的代理实现类(比如为 UserMapperProxyImpl ), 那么当业务代码调用时,比如userMaper.findUser(1L),
           那么这个userMaper代理实现类(UserMapperProxyImpl)便会invoke代理方法,代理方法会根据方法名去MyBatis中的Configuration找对应的Mapper,然后执行SQL操作
 
        -->
