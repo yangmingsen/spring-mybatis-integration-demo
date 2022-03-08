@@ -18,6 +18,8 @@ public class MyBatisTestDemo {
         MyUser user = userMapper.getUser(1);
         System.out.println(user.toString());
 
+        userMapper.getUserList().forEach(System.out::println);
+
         RoleMapper roleMapper = ac.getBean(RoleMapper.class);
         Role role = new Role();
         role.setId(3);

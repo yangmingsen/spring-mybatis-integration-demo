@@ -6,5 +6,5 @@
     <bean id="myCat" class="top.yms.ui.bean.MyCat"/>
     <bean class="top.yms.ui.bean.MyBody"/>
     <bean class="top.yms.ui.bean.MyHeader"/>
-    <bean class="top.yms.ui.bean.MyInstantiationAwareBeanPostProcessor"></bean>
+    <bean class="top.yms.ui.bean.MyInstantiationAwareBeanPostProcessor"/>
 </beans>

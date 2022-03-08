@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+
+    <bean id="changeMe" class="top.yms.test.TestChangeMethod">
+        <replaced-method name="changeMe" replacer="replacer"/>
+    </bean>
+
+    <bean id="replacer" class="top.yms.test.ReplacerChangeMethod"/>
+
+    <bean id="aClass" class="top.yms.test.AClass">
+        <property name="name" value="A"></property>
+        <property name="bClass" ref="bClass"></property>
+     </bean>
+    <bean id="bClass" class="top.yms.test.BClass">
+        <property name="name" value="B"></property>
+    </bean>
+    <bean id="cClass" class="top.yms.test.CClass" init-method="doPrint">
+        <property name="name" value="C"></property>
+        <property name="aClass" ref="aClass"></property>
+    </bean>
+
+</beans>

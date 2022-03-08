@@ -13,7 +13,9 @@ public class SecurityAspect {
     private AuthService authService;
 
     @Pointcut("execution(* top.yms.ui.aop.ProductService.delete(..))")
-    public void adminOnly(){}
+    public void adminOnly(){
+        System.out.println("I'm adminOnly method");
+    }
 
     @Before("adminOnly()")
     public void check() {

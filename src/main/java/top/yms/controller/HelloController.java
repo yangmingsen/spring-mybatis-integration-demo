@@ -5,6 +5,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -31,7 +33,7 @@ public class HelloController {
      * @return
      */
     @RequestMapping(value="/testRequestMapping",params = {"username=heihei"},headers = {"Accept"})
-    public String testRequestMapping(){
+    public String testRequestMapping(HttpServletRequest request, HttpServletResponse response, String name, String username){
         lock.lock();
         try {
             count++;
